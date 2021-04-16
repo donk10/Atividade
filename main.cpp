@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
   
-  string text = "12zy";
+  string text = "ABCZ9Z";
   string coded_text;
   string decoded_text;
   int c;
@@ -18,6 +18,7 @@ int main() {
   string converted_number = "ABCDEFGHIJ";
   string repeated_letters;
   string letter;
+  string x;
 
   transform(text.begin(), text.end(), text.begin(), ::toupper);
   
@@ -44,13 +45,17 @@ int main() {
     }   
   }
 
-  for(d = 1; d < coded_text.length(); d++){
-    if(coded_text[d] == coded_text[d - 1]){
+  for(d = 0; d <= coded_text.length() ; d++){
+    cout << coded_text[d] << endl << coded_text[d - 1] << endl;
+    cout << coded_text << endl;
+    if(coded_text[d] == coded_text[d-1]){
       r++;
     }
     else if(r > 1){
       cout << d << endl << r << endl;
-      coded_text.erase(d, r);
+      coded_text.insert(d - 1, to_string(r));
+      coded_text.erase(d - r, r - 1);
+      d = 0;
       r = 1;
     }
     
