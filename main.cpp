@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
   
-  string text = "ABCZ9Z";
+  string text;
   string coded_text;
   string decoded_text;
   int c;
@@ -16,53 +16,67 @@ int main() {
   string z;
   string numbers = "0123456789";
   string converted_number = "ABCDEFGHIJ";
-  string repeated_letters;
   string letter;
-  string x;
-
-  transform(text.begin(), text.end(), text.begin(), ::toupper);
+  string method;
   
-  if(text.length() > 0 && text.length() < 1000){
-    for(c = 0; c < text.length(); c++){
-        z = "Z";
-        n = 0;
-      while(n < numbers.length()){
-        if(text[c] == numbers[n]){
-          coded_text.append(z.append(1, converted_number[n]));
-          break;
-        }
-        else if(n == 9){
-          letter = text[c];
-          if(letter == "Z"){
-            coded_text.append("ZZ");
+  cout << "'C' para codificar 'D' para decodificar: " ;
+  cin >> method;
+
+  if(method == "C"){
+    cout << "Digite a mensagem para codificação: ";
+    cin >> text;
+    transform(text.begin(), text.end(), text.begin(), ::toupper);
+    if(text.length() > 0 && text.length() < 1000){
+      for(c = 0; c < text.length(); c++){
+          z = "Z";
+          n = 0;
+        while(n < numbers.length()){
+          if(text[c] == numbers[n]){
+            coded_text.append(z.append(1, converted_number[n]));
+            break;
           }
-          else{
-            coded_text.append(1, text[c]);
+          else if(n == 9){
+            letter = text[c];
+            if(letter == "Z"){
+              coded_text.append("ZZ");
+            }
+            else{
+              coded_text.append(1, text[c]);
+            }
           }
+          n++;
         }
-        n++;
+      }   
+    }
+
+    for(d = 0; d <= coded_text.length() ; d++){
+      if(coded_text[d] == coded_text[d-1]){
+        r++;
       }
-    }   
+      else if(r > 1){
+        coded_text.insert(d - 1, to_string(r));
+        coded_text.erase(d - r, r - 1);
+        d = 0;
+        r = 1;
+      }
+    }
+    cout << "MENSAGEM CODIFICADA: " << coded_text << endl;
+  }
+  else if(method == "D"){
+    cout << "Digite a mensagem para decodificação: ";
+    cin >> text;
+    if(text.length() > 0 && text.length() < 1000){
+      for(c = 0; c <= text.length() ; d++){
+        n = 0;
+        while(n < numbers.length()){
+          if(text[c] == numbers[n]){
+          }
+        }
+      }
+    }
   }
 
-  for(d = 0; d <= coded_text.length() ; d++){
-    cout << coded_text[d] << endl << coded_text[d - 1] << endl;
-    cout << coded_text << endl;
-    if(coded_text[d] == coded_text[d-1]){
-      r++;
-    }
-    else if(r > 1){
-      cout << d << endl << r << endl;
-      coded_text.insert(d - 1, to_string(r));
-      coded_text.erase(d - r, r - 1);
-      d = 0;
-      r = 1;
-    }
-    
-  }
 
-
-cout << coded_text << endl;
 }
 
 //int find_repeated_letters(){
