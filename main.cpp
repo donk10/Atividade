@@ -21,10 +21,15 @@ int main() {
   string repeated_letter;
   string repeated_letter_number;
   string repeated_letter_string;
+  string non_converted_number;
   int position;
   string method;
+  int number;
+  string last_number;
+  string last_number_;
+  string last_lertter;
   
-  cout << "'C' para codificar 'D' para decodificar: " ;
+  cout << "Digite 'C' para codificação 'D' para decodificação: " ;
   cin >> method;
 
   if(method != "C" && method != "D"){
@@ -57,7 +62,6 @@ int main() {
         }
       }   
     }
-
     for(d = 0; d <= coded_text.length() ; d++){
       if(coded_text[d] == coded_text[d-1]){
         r++;
@@ -78,34 +82,45 @@ int main() {
     if(coded_text.length() > 0 && coded_text.length() < 1000){
       for(c = 0; c <= coded_text.length() ; c++){
         n = 0;
-        
         while(n < numbers.length()){
-          
           if(coded_text[c] == numbers[n]){
+            last_number = numbers[n];
             repeated_letter_string.clear();
             repeated_letter = coded_text[c + 1];
             repeated_letter_number = coded_text[c];
             position = stoi(repeated_letter_number);
-            for(l = 0; l < position; l++){
-              repeated_letter_string.append(1, coded_text[c + 1]);
+            if(repeated_letter == "Z"){
+              for(l = 1; l < (position / 2); l++){
+                repeated_letter_string.append(1, coded_text[c + 1]);
+              }
+              decoded_text.append(repeated_letter_string);
             }
-
-
-            
-            
-            
-
+            else{
+              for(l = 1; l < position; l++){
+                repeated_letter_string.append(1, coded_text[c + 1]);
+              }
+              decoded_text.append(repeated_letter_string);
+            }
             break;
           }
           else if(n == 9){
-            break;
+            letter = coded_text[c];
+            last_number_ = coded_text[c - 1];
+            if(letter == "Z" && last_number_ != last_number){
+              non_converted_number = coded_text[c + 1];
+              number = converted_number.find(non_converted_number);
+              decoded_text.append(to_string(number));
+              coded_text.erase(coded_text.begin() + c + 1);
+            }
+            else{
+              decoded_text.append(1, coded_text[c]);
+            }
           }
           n++;
         }
       }
     }
-    cout << "MENSAGEM DECODIFICADA: " << coded_text << endl;
-    cout << "MENSAGEM DECODIFICADA: " << repeated_letter_string << endl;
+    cout << "MENSAGEM DECODIFICADA: " << decoded_text << endl;
   }
-
+  main();
 }
