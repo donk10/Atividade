@@ -6,28 +6,32 @@ using namespace std;
 
 int main() {
   
-  string text;
-  string coded_text;
-  string decoded_text;
   int c;
   int d;
   int n;
   int l;
+  int x;
+  int position;
+  int number;
   int r = 1;
+  string text;
+  string coded_text;
+  string decoded_text;
   string z;
-  string numbers = "0123456789";
-  string converted_number = "ABCDEFGHIJ";
   string letter;
   string repeated_letter;
   string repeated_letter_number;
   string repeated_letter_string;
   string non_converted_number;
-  int position;
   string method;
-  int number;
   string last_number;
   string last_number_;
   string last_lertter;
+  string next_letter;
+  string atual_number;
+  string numbers = "0123456789";
+  string converted_number = "ABCDEFGHIJ";
+  
   
   cout << "Digite 'C' para codificação 'D' para decodificação: " ;
   cin >> method;
@@ -63,7 +67,7 @@ int main() {
       }   
     }
     for(d = 0; d <= coded_text.length() ; d++){
-      if(coded_text[d] == coded_text[d-1]){
+      if(coded_text[d] == coded_text[d - 1]){
         r++;
       }
       else if(r > 1){
@@ -91,26 +95,36 @@ int main() {
             position = stoi(repeated_letter_number);
             if(repeated_letter == "Z"){
               for(l = 1; l < (position / 2); l++){
-                repeated_letter_string.append(1, coded_text[c + 1]);
+                repeated_letter_string.append(repeated_letter);
               }
+              cout << repeated_letter_string << endl;
               decoded_text.append(repeated_letter_string);
             }
             else{
               for(l = 1; l < position; l++){
-                repeated_letter_string.append(1, coded_text[c + 1]);
+                repeated_letter_string.append(repeated_letter);
               }
               decoded_text.append(repeated_letter_string);
             }
             break;
           }
           else if(n == 9){
+            x = 0;
             letter = coded_text[c];
+            next_letter = coded_text[c + 1];
             last_number_ = coded_text[c - 1];
             if(letter == "Z" && last_number_ != last_number){
-              non_converted_number = coded_text[c + 1];
-              number = converted_number.find(non_converted_number);
-              decoded_text.append(to_string(number));
-              coded_text.erase(coded_text.begin() + c + 1);
+              while(x < converted_number.length()){
+                atual_number = converted_number[x];
+                if(next_letter == atual_number){
+                  non_converted_number = coded_text[c + 1];
+                  number = converted_number.find(non_converted_number);
+                  decoded_text.append(to_string(number));
+                  coded_text.erase(coded_text.begin() + c + 1);
+                  break;
+                }
+                x++;
+              } 
             }
             else{
               decoded_text.append(1, coded_text[c]);
