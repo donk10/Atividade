@@ -29,6 +29,7 @@ int main() {
   string last_lertter;
   string next_letter;
   string atual_number;
+  string continue_;
   string numbers = "0123456789";
   string converted_number = "ABCDEFGHIJ";
   
@@ -97,7 +98,6 @@ int main() {
               for(l = 1; l < (position / 2); l++){
                 repeated_letter_string.append(repeated_letter);
               }
-              cout << repeated_letter_string << endl;
               decoded_text.append(repeated_letter_string);
             }
             else{
@@ -136,5 +136,15 @@ int main() {
     }
     cout << "MENSAGEM DECODIFICADA: " << decoded_text << endl;
   }
-  main();
+
+  cout << endl << "Continuar? ('Y'/'N')" << endl;
+  cin >> continue_;
+  cout << endl;
+
+  if(continue_ == "Y"){
+    main();
+  }
+  else{
+    exit(0);
+  }
 }
